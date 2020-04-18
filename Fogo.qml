@@ -4,7 +4,7 @@ import QtQuick.Particles 2.0
 Item {
     id: fireparticles
 
-    width: 320
+    width: 200
     height: 480
 
     ParticleSystem {
@@ -52,8 +52,8 @@ Item {
             size: (parent.width/5)
             endSize: (parent.width/5)/2
             sizeVariation: 10
-            acceleration: PointDirection { y: -40 }
-            velocity: AngleDirection { angle: 270; magnitude: 20; angleVariation: 22; magnitudeVariation: 5 }
+            acceleration: PointDirection { y: 40 }
+            velocity: AngleDirection { angle: 110; magnitude: 20; angleVariation: 22; magnitudeVariation: 50 }
         }
 
         Emitter {
@@ -65,8 +65,8 @@ Item {
             size: (parent.width/5)
             endSize: (parent.width/5)/2
             sizeVariation: 10
-            acceleration: PointDirection { y: -40 }
-            velocity: AngleDirection { angle: 270; magnitude: 20; angleVariation: 22; magnitudeVariation: 5 }
+            acceleration: PointDirection { y: 40 }
+            velocity: AngleDirection { angle: 110; magnitude: 20; angleVariation: 22; magnitudeVariation: 50 }
         }
 
         TrailEmitter {

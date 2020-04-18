@@ -41,7 +41,7 @@ Window {
     }
     Image{
         anchors.left:parent.left
-        height: castelo.height*0.1
+        height: castelo.height*0.2
         source: "qrc:///imagens/sol.png"
         fillMode: Image.PreserveAspectFit
     }

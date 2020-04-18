@@ -20,6 +20,9 @@ Item {
         x: dragao.width
       }
     Fogo{
+        width: parent.width/2
+        y:-height*0.4
+        x:-cabeca.width+cabeca.width*0.3
 
     }
     Image{
