@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Cavaleiro.qml</file>
+        <file>Dragao.qml</file>
+        <file>Fogo.qml</file>
+    </qresource>
+    <qresource prefix="/imagens">
+        <file>cavaleiro.png</file>
+        <file>castelo.png</file>
+        <file>asa.png</file>
+        <file>cabeca.png</file>
+        <file>corpo.png</file>
+        <file>pernas.png</file>
+        <file>sol.png</file>
+        <file>nuvem.png</file>
+    </qresource>
+</RCC>
