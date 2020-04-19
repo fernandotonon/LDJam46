@@ -12,18 +12,29 @@ Item {
     property bool desce: false
     property bool esquerda: false
     property bool direita: false
+    property bool soltaFogo: false
+    property bool virado: false
+    property alias fogo: dragao.soltaFogo
+    property alias viradoDireita: dragao.virado
+    property alias cabeca:cabeca
 
-    Scale{id: mScale
-         xScale: -1 }
+    Scale{
+        id: mScale
+        xScale: -1
+    }
+
     Translate {
         id: mTranslate
         x: dragao.width
-      }
+    }
+
     Fogo{
+        visible: soltaFogo
         width: parent.width/2
         y:-height*0.4
         x:-cabeca.width+cabeca.width*0.3
-
+        angulo: 110
+        direcao: 40
     }
     Image{
         id:cabeca
@@ -69,13 +80,25 @@ Item {
     Keys.onRightPressed: {
         direita = true
         transform = [mScale,mTranslate]
+        virado = true
     }
     Keys.onLeftPressed: {
         esquerda = true
         transform = 0
+        virado = false
     }
     Keys.onDownPressed: desce = true
     Keys.onUpPressed: sobe = true
+    Keys.onPressed: {
+        switch(event.key){
+            case Qt.Key_Space:
+                soltaFogo = true;
+            case Qt.Key_A:
+                soltaFogo = true;
+                break;
+        }
+        event.accepted = true;
+    }
 
     Keys.onReleased: {
         switch(event.key){
@@ -90,6 +113,11 @@ Item {
                 break;
             case Qt.Key_Down:
                 desce = false;
+                break;
+            case Qt.Key_Space:
+                soltaFogo = false;
+            case Qt.Key_A:
+                soltaFogo = false;
                 break;
         }
         event.accepted = true;
@@ -116,6 +144,4 @@ Item {
             y+=y+deslocamento+dragao.height<janela.height?deslocamento:0;
         }
     }
-
-
 }

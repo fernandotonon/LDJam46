@@ -6,6 +6,10 @@ Item {
 
     width: 200
     height: 480
+    property int anguloFogo: 270
+    property alias angulo: fireparticles.anguloFogo
+    property int direcaoFogo: -40
+    property alias direcao: fireparticles.direcaoFogo
 
     ParticleSystem {
         id: firesystem
@@ -52,8 +56,8 @@ Item {
             size: (parent.width/5)
             endSize: (parent.width/5)/2
             sizeVariation: 10
-            acceleration: PointDirection { y: 40 }
-            velocity: AngleDirection { angle: 110; magnitude: 20; angleVariation: 22; magnitudeVariation: 50 }
+            acceleration: PointDirection { y: direcaoFogo }
+            velocity: AngleDirection { angle: anguloFogo; magnitude: 20; angleVariation: 22; magnitudeVariation: 50 }
         }
 
         Emitter {
@@ -65,8 +69,8 @@ Item {
             size: (parent.width/5)
             endSize: (parent.width/5)/2
             sizeVariation: 10
-            acceleration: PointDirection { y: 40 }
-            velocity: AngleDirection { angle: 110; magnitude: 20; angleVariation: 22; magnitudeVariation: 50 }
+            acceleration: PointDirection { y: direcaoFogo }
+            velocity: AngleDirection { angle: anguloFogo; magnitude: 20; angleVariation: 22; magnitudeVariation: 50 }
         }
 
         TrailEmitter {

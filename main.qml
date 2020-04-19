@@ -6,6 +6,9 @@ Window {
     visible: true
     width: 640
     height: 480
+
+    property alias dragao:dragao
+
     Rectangle{
         anchors.fill: parent
         gradient: Gradient{
@@ -38,6 +41,11 @@ Window {
         Cavaleiro{
 
         }
+        Cavaleiro{
+            y:height+5
+            x:-100
+
+        }
     }
     Image{
         anchors.left:parent.left
@@ -60,6 +68,6 @@ Window {
         source: "qrc:///imagens/nuvem.png"
     }
     Dragao{
-
+        id:dragao
     }
 }
