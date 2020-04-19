@@ -42,8 +42,10 @@ Window {
 
         }
         Cavaleiro{
+            y:height/2+1
+        }
+        Cavaleiro{
             y:height+5
-            x:-100
         }
     }
     Image{
@@ -58,12 +60,9 @@ Window {
         height: parent.height
         source: "qrc:///imagens/castelo.png"
         fillMode: Image.PreserveAspectFit
-        Image{
+        Princesa{
             x:castelo.width*0.32
             y:castelo.height*0.31
-            height: parent.height*0.1
-            fillMode: Image.PreserveAspectFit
-            source: "qrc:///imagens/princesa.png"
         }
     }
     Image{
@@ -75,5 +74,6 @@ Window {
     }
     Dragao{
         id:dragao
+        focus: true
     }
 }

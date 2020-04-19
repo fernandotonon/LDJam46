@@ -4,6 +4,8 @@
         <file>Cavaleiro.qml</file>
         <file>Dragao.qml</file>
         <file>Fogo.qml</file>
+        <file>Princesa.qml</file>
+        <file>Barra.qml</file>
     </qresource>
     <qresource prefix="/imagens">
         <file>cavaleiro.png</file>

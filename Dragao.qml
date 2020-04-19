@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.14
 
 Item {
     id: dragao
@@ -6,7 +6,12 @@ Item {
     height: corpo.height
     width: cabeca.width+corpo.width+pernas.width
 
-    property int altura: castelo.height*0.1
+    property int maxVida: 20
+    property int vida: maxVida
+    property int maxEnergia: 20
+    property real energia: maxVida
+
+    property int altura: castelo.height*0.08
     property int deslocamento: 2
     property bool sobe: false
     property bool desce: false
@@ -14,7 +19,7 @@ Item {
     property bool direita: false
     property bool soltaFogo: false
     property bool virado: false
-    property alias fogo: dragao.soltaFogo
+    property alias fogo: baforada.visible
     property alias viradoDireita: dragao.virado
     property alias cabeca:cabeca
 
@@ -29,7 +34,8 @@ Item {
     }
 
     Fogo{
-        visible: soltaFogo
+        id:baforada
+        visible: soltaFogo&&energia>=1
         width: parent.width/2
         anchors.centerIn: cabeca
         anchors.horizontalCenterOffset:-cabeca.width/2
@@ -81,11 +87,13 @@ Item {
     Keys.onRightPressed: {
         direita = true
         transform = [mScale,mTranslate]
+        barras.transform = [mScale,mTranslate]
         virado = true
     }
     Keys.onLeftPressed: {
         esquerda = true
         transform = 0
+        barras.transform = 0
         virado = false
     }
     Keys.onDownPressed: desce = true
@@ -93,7 +101,6 @@ Item {
     Keys.onPressed: {
         switch(event.key){
             case Qt.Key_Space:
-                soltaFogo = true;
             case Qt.Key_A:
                 soltaFogo = true;
                 break;
@@ -116,12 +123,26 @@ Item {
                 desce = false;
                 break;
             case Qt.Key_Space:
-                soltaFogo = false;
             case Qt.Key_A:
                 soltaFogo = false;
                 break;
         }
         event.accepted = true;
+    }
+
+    Item{
+        id:barras
+        anchors.fill: parent
+        anchors.topMargin: -20
+        Barra{
+            posicao: vida/maxVida
+        }
+        Barra{
+            y:height+1
+            posicao: energia/maxEnergia
+            cor1:"darkred"
+            cor2:"red"
+        }
     }
 
     Timer{
@@ -144,5 +165,10 @@ Item {
         if(desce){
             y+=y+deslocamento+dragao.height<janela.height?deslocamento:0;
         }
+        if(soltaFogo)
+            energia-=energia>=1?0.2:0
+        else
+            energia+=energia<maxEnergia?0.1:0
+
     }
 }
