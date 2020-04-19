@@ -6,6 +6,7 @@
         <file>Fogo.qml</file>
         <file>Princesa.qml</file>
         <file>Barra.qml</file>
+        <file>Lanca.qml</file>
     </qresource>
     <qresource prefix="/imagens">
         <file>cavaleiro.png</file>

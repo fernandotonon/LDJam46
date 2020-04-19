@@ -166,9 +166,13 @@ Item {
             y+=y+deslocamento+dragao.height<janela.height?deslocamento:0;
         }
         if(soltaFogo)
-            energia-=energia>=1?0.2:0
+            energia-=energia>=1?0.1:0
         else
             energia+=energia<maxEnergia?0.1:0
 
+    }
+
+    function dano(){
+        vida-=vida>0?1:0
     }
 }

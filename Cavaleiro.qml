@@ -1,6 +1,7 @@
 import QtQuick 2.14
 
 Image{
+    id:cavaleiro
     height: castelo.height*0.1
     source:"qrc:///imagens/cavaleiro.png"
     fillMode: Image.PreserveAspectFit
@@ -9,12 +10,23 @@ Image{
     property int maxVida: 10
     property real vida: maxVida
 
+    property var alvo;
+
     property bool pegandoFogo: janela.dragao.fogo
                                &&Math.abs(janela.dragao.x+(janela.dragao.viradoDireita?janela.dragao.width:0)-x)<width*0.9
                                &&Math.abs(janela.dragao.y-y-parent.y)<janela.dragao.height*2
 
     Component.onCompleted: {
         timerRevive.start()
+    }
+
+    onAlvoChanged: {
+        if(alvo)
+            timerAtaca.start()
+        else{
+            lanca.x=lanca.parent.width*0.4
+            lanca.y=lanca.parent.height*0.25
+        }
     }
 
     onVidaChanged: {
@@ -34,6 +46,47 @@ Image{
         vida=maxVida
         fogo.visible=false
         timerRevive.interval=Math.random()*5000
+    }
+
+    Lanca{
+        id:lanca
+        x:parent.width*0.4
+        y:parent.height*0.25
+        NumberAnimation on x{
+            id:lXAnim
+            running: false
+            alwaysRunToEnd: true
+            duration:700
+            easing.type: Easing.OutExpo
+        }
+        NumberAnimation on y{
+            id:lYAnim
+            running: false
+            alwaysRunToEnd: true
+            duration:500
+            easing.type: Easing.OutExpo
+            onFinished: {
+                            lanca.x=lanca.parent.width*0.4
+                            lanca.y=lanca.parent.height*0.25
+                            if(alvo)
+                                alvo.dano()
+                        }
+        }
+    }
+    Timer{
+        id:timerAtaca
+        interval: Math.random()*500
+        running: false
+        onTriggered: ataca()
+    }
+
+    function ataca(){
+        if(alvo){
+            lXAnim.to=cavaleiro.mapFromItem(alvo,alvo.width/2,0).x-lanca.width/2
+            lXAnim.start()
+            lYAnim.to=cavaleiro.mapFromItem(alvo,0,0).y+alvo.height/2
+            lYAnim.start()
+        }
     }
 
     Timer{
@@ -66,13 +119,20 @@ Image{
     }
 
     function anda(){
-        if(x<janela.width-castelo.width*0.8){
-            x+=10
-        }else{
-            x=0
-            fogo.visible = false
+
+        if(Math.abs(cavaleiro.mapFromItem(janela.dragao,0,0).x)<width*2&&
+                Math.abs(cavaleiro.mapFromItem(janela.dragao,0,0).y)<height)
+            alvo = janela.dragao
+        else if(x>=janela.width-castelo.width)
+            alvo=janela.princesa
+        else
+            alvo = null
+
+        if(!alvo){
+                x+=10
         }
+
         vida-=fogo.visible&&vida>0?1:0
-        vida-=pegandoFogo&&vida>0?0.5:0
+        vida-=pegandoFogo&&vida>0?1:0
     }
 }

@@ -8,6 +8,7 @@ Window {
     height: 480
 
     property alias dragao:dragao
+    property alias princesa:princesa
 
     Rectangle{
         anchors.fill: parent
@@ -61,6 +62,7 @@ Window {
         source: "qrc:///imagens/castelo.png"
         fillMode: Image.PreserveAspectFit
         Princesa{
+            id:princesa
             x:castelo.width*0.32
             y:castelo.height*0.31
         }

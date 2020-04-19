@@ -13,7 +13,7 @@ Image{
         posicao: vida/maxVida
     }
 
-    function tomaDano(){
+    function dano(){
         vida-=vida>0?1:0
     }
 }
