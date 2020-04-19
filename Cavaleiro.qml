@@ -20,6 +20,12 @@ Image{
         timerRevive.start()
     }
 
+    function restart(){
+        alvo=null
+        x=-100000
+        timerRevive.start()
+    }
+
     onAlvoChanged: {
         if(alvo)
             timerAtaca.start()
@@ -32,6 +38,7 @@ Image{
     onVidaChanged: {
         if(vida<=0){
             x=-100000
+            alvo=null
             timerRevive.start()
         }
     }
@@ -129,7 +136,10 @@ Image{
             alvo = null
 
         if(!alvo){
-                x+=10
+            x+=10
+            lanca.rotation=0
+        }else{
+            lanca.rotation = Math.atan(cavaleiro.mapFromItem(janela.dragao,0,0).y/cavaleiro.mapFromItem(janela.dragao,0,0).x)*180/Math.PI
         }
 
         vida-=fogo.visible&&vida>0?1:0

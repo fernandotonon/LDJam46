@@ -23,6 +23,8 @@ Item {
     property alias viradoDireita: dragao.virado
     property alias cabeca:cabeca
 
+    signal morreu()
+
     Scale{
         id: mScale
         xScale: -1
@@ -65,6 +67,7 @@ Item {
         fillMode: Image.PreserveAspectFit
         transformOrigin: Item.TopLeft
         SequentialAnimation on rotation {
+            id:asaAnim
             loops:  Animation.Infinite
             NumberAnimation{
                 from: 0
@@ -172,7 +175,34 @@ Item {
 
     }
 
+    NumberAnimation on y{
+        id:yAnim
+        running: false
+        alwaysRunToEnd: true
+        duration:500
+        easing.type: Easing.OutExpo
+        to: janela.height-height
+        onFinished: {
+            asaAnim.pause()
+            morreu()
+        }
+    }
+
     function dano(){
         vida-=vida>0?1:0
+        if(vida<=0){
+            enabled = false
+            yAnim.start()
+        }
+    }
+
+    function restart(){
+        enabled=true
+        focus=true
+        yAnim.stop()
+        x=0
+        y=0
+        asaAnim.resume()
+        vida=maxVida
     }
 }

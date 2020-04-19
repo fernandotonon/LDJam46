@@ -40,12 +40,14 @@ Window {
         }
 
         Cavaleiro{
-
+            id:c1
         }
         Cavaleiro{
+            id:c2
             y:height/2+1
         }
         Cavaleiro{
+            id:c3
             y:height+5
         }
     }
@@ -65,6 +67,7 @@ Window {
             id:princesa
             x:castelo.width*0.32
             y:castelo.height*0.31
+            onMorreu: gameOver()
         }
     }
     Image{
@@ -77,5 +80,42 @@ Window {
     Dragao{
         id:dragao
         focus: true
+        onMorreu: gameOver()
+    }
+
+    Text{
+        id:goText
+        text:"Game Over"
+        anchors.centerIn: parent
+        font.bold: true
+        font.pixelSize: janela.height*0.1
+        color: "gold"
+        style: Text.Outline
+        styleColor: "yellow"
+        horizontalAlignment: Text.Center
+        visible: false
+    }
+    Timer{
+        id:timerRestart
+        interval: 5000
+        running: false
+        onTriggered: janela.restart()
+    }
+
+    function gameOver(){
+        if(!goText.visible){
+            goText.visible = true
+            timerRestart.start()
+        }
+    }
+    function restart(){
+        c1.restart()
+        c2.restart()
+        c3.restart()
+        dragao.restart()
+        princesa.restart()
+        goText.visible=false
+        timerRestart.stop()
+        console.log("restart")
     }
 }
