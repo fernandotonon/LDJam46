@@ -31,9 +31,10 @@ Item {
     Fogo{
         visible: soltaFogo
         width: parent.width/2
-        y:-height*0.4
-        x:-cabeca.width+cabeca.width*0.3
-        angulo: 110
+        anchors.centerIn: cabeca
+        anchors.horizontalCenterOffset:-cabeca.width/2
+        anchors.verticalCenterOffset: cabeca.height/2
+        angulo: 130
         direcao: 40
     }
     Image{
