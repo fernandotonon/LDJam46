@@ -1,4 +1,5 @@
 import QtQuick 2.14
+import QtMultimedia 5.14
 
 Item {
     id: dragao
@@ -24,6 +25,8 @@ Item {
     property alias cabeca:cabeca
 
     signal morreu()
+
+    onSoltaFogoChanged: if(soltaFogo) dragaoSFX.play()
 
     Scale{
         id: mScale
@@ -186,6 +189,11 @@ Item {
             asaAnim.pause()
             morreu()
         }
+    }
+
+    SoundEffect{
+        id: dragaoSFX
+        source: "qrc:///SFX/dragon.wav"
     }
 
     function dano(){

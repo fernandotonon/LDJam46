@@ -9,6 +9,8 @@ Window {
 
     property alias dragao:dragao
     property alias princesa:princesa
+    property alias gameover: goText.visible
+    property int timeToRestart: 5
 
     Rectangle{
         anchors.fill: parent
@@ -76,6 +78,10 @@ Window {
         height: parent.height*0.2
         fillMode: Image.PreserveAspectFit
         source: "qrc:///imagens/nuvem.png"
+        NumberAnimation on x{
+            to: janela.width
+            duration: 9999999
+        }
     }
     Dragao{
         id:dragao
@@ -85,7 +91,7 @@ Window {
 
     Text{
         id:goText
-        text:"Game Over"
+        text:"Game Over \n "+timeToRestart
         anchors.centerIn: parent
         font.bold: true
         font.pixelSize: janela.height*0.1
@@ -97,10 +103,16 @@ Window {
     }
     Timer{
         id:timerRestart
-        interval: 5000
+        interval: 1000
         running: false
-        onTriggered: janela.restart()
+        repeat: true
+        onTriggered: janela.timeToRestart--
     }
+    onTimeToRestartChanged: if(timeToRestart==0) {
+                                timerRestart.stop()
+                                timeToRestart=5
+                                restart()
+                            }
 
     function gameOver(){
         if(!goText.visible){
@@ -112,10 +124,9 @@ Window {
         c1.restart()
         c2.restart()
         c3.restart()
+        timerRestart.stop()
         dragao.restart()
         princesa.restart()
         goText.visible=false
-        timerRestart.stop()
-        console.log("restart")
     }
 }

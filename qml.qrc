@@ -19,4 +19,9 @@
         <file>nuvem.png</file>
         <file>princesa.png</file>
     </qresource>
+    <qresource prefix="/SFX">
+        <file>dragon.wav</file>
+        <file>princessHelp.wav</file>
+        <file>pocoto.wav</file>
+    </qresource>
 </RCC>

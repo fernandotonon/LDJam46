@@ -1,4 +1,5 @@
 import QtQuick 2.14
+import QtMultimedia 5.14
 
 Image{
     height: janela.height*0.1
@@ -45,7 +46,31 @@ Image{
         }
     }
 
+    SoundEffect{
+        id: helpSFX
+        source: "qrc:///SFX/princessHelp.wav"
+    }
+
+    Text{
+        anchors.horizontalCenter: parent.horizontalCenter
+        y:-height-8
+        text:"Help!"
+        opacity: 0
+        color:"purple"
+        font.bold:true
+        NumberAnimation on opacity{
+            id:helpAnim
+            from: 1.0
+            to: 0.0
+            duration: 1000
+        }
+    }
+
     function dano(){
+        if(!helpSFX.playing){
+            helpSFX.play()
+            helpAnim.start()
+        }
         vida-=vida>0?1:0
         if(vida<=0){
             enabled = false

@@ -1,4 +1,5 @@
 import QtQuick 2.14
+import QtMultimedia 5.14
 
 Image{
     id:cavaleiro
@@ -44,7 +45,7 @@ Image{
     }
     Timer{
         id:timerRevive
-        interval: Math.random()*5000
+        interval: Math.random()*10000
         running: false
         onTriggered: revive()
     }
@@ -52,7 +53,7 @@ Image{
         x=-width
         vida=maxVida
         fogo.visible=false
-        timerRevive.interval=Math.random()*5000
+        timerRevive.interval=Math.random()*10000
     }
 
     Lanca{
@@ -88,7 +89,7 @@ Image{
     }
 
     function ataca(){
-        if(alvo){
+        if(alvo&&!janela.gameover){
             lXAnim.to=cavaleiro.mapFromItem(alvo,alvo.width/2,0).x-lanca.width/2
             lXAnim.start()
             lYAnim.to=cavaleiro.mapFromItem(alvo,0,0).y+alvo.height/2
@@ -125,6 +126,12 @@ Image{
         posicao: vida/maxVida
     }
 
+    SoundEffect{
+        id: pocotoSFX
+        volume: 0.01
+        source: "qrc:///SFX/pocoto.wav"
+    }
+
     function anda(){
 
         if(Math.abs(cavaleiro.mapFromItem(janela.dragao,0,0).x)<width*2&&
@@ -138,6 +145,8 @@ Image{
         if(!alvo){
             x+=10
             lanca.rotation=0
+            if(!pocotoSFX.playing&&x>0)
+                pocotoSFX.play()
         }else{
             lanca.rotation = Math.atan(cavaleiro.mapFromItem(janela.dragao,0,0).y/cavaleiro.mapFromItem(janela.dragao,0,0).x)*180/Math.PI
         }
