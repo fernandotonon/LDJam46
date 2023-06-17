@@ -1,5 +1,5 @@
-import QtQuick 2.14
-import QtMultimedia 5.14
+import QtQuick
+import QtMultimedia
 
 Image{
     height: janela.height*0.1

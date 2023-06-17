@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Cavaleiro.qml</file>
+        <file alias="Cavaleiro.qml">Cavaleiro.qml</file>
         <file>Dragao.qml</file>
         <file>Fogo.qml</file>
         <file>Princesa.qml</file>

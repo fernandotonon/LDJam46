@@ -257,6 +257,7 @@ DIST          = ../Qt/6.6.0/wasm_singlethread/mkspecs/features/spec_pre.prf \
 		../Qt/6.6.0/wasm_singlethread/mkspecs/common/wasm/wasm.conf \
 		../Qt/6.6.0/wasm_singlethread/mkspecs/wasm-emscripten/qmake.conf \
 		../Qt/6.6.0/wasm_singlethread/mkspecs/features/spec_post.prf \
+		../LDJam46/.qmake.stash \
 		../Qt/6.6.0/wasm_singlethread/mkspecs/features/exclusive_builds.prf \
 		../Qt/6.6.0/wasm_singlethread/mkspecs/features/toolchain.prf \
 		../Qt/6.6.0/wasm_singlethread/mkspecs/features/default_pre.prf \
@@ -488,6 +489,7 @@ Makefile: ../LDJam46/LDJam46.pro ../Qt/6.6.0/wasm_singlethread/mkspecs/wasm-emsc
 		../Qt/6.6.0/wasm_singlethread/mkspecs/common/wasm/wasm.conf \
 		../Qt/6.6.0/wasm_singlethread/mkspecs/wasm-emscripten/qmake.conf \
 		../Qt/6.6.0/wasm_singlethread/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../Qt/6.6.0/wasm_singlethread/mkspecs/features/exclusive_builds.prf \
 		../Qt/6.6.0/wasm_singlethread/mkspecs/features/toolchain.prf \
 		../Qt/6.6.0/wasm_singlethread/mkspecs/features/default_pre.prf \
@@ -735,6 +737,7 @@ Makefile: ../LDJam46/LDJam46.pro ../Qt/6.6.0/wasm_singlethread/mkspecs/wasm-emsc
 ../Qt/6.6.0/wasm_singlethread/mkspecs/common/wasm/wasm.conf:
 ../Qt/6.6.0/wasm_singlethread/mkspecs/wasm-emscripten/qmake.conf:
 ../Qt/6.6.0/wasm_singlethread/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../Qt/6.6.0/wasm_singlethread/mkspecs/features/exclusive_builds.prf:
 ../Qt/6.6.0/wasm_singlethread/mkspecs/features/toolchain.prf:
 ../Qt/6.6.0/wasm_singlethread/mkspecs/features/default_pre.prf:
@@ -1063,7 +1066,7 @@ uninstall_target: FORCE
 
 install_js_file: first FORCE
 	@test -d $(INSTALL_ROOT)/opt/LDJam46/bin || mkdir -p $(INSTALL_ROOT)/opt/LDJam46/bin
-	$(QINSTALL_PROGRAM) /Users/fernandotonon/LDJam46/LDJam46.js $(INSTALL_ROOT)/opt/LDJam46/bin/LDJam46.js
+	$(QINSTALL) /Users/fernandotonon/build-LDJam46-WebAssembly_Qt_6_6_0_single_threaded-Release/LDJam46.js $(INSTALL_ROOT)/opt/LDJam46/bin/LDJam46.js
 
 uninstall_js_file: FORCE
 	-$(DEL_FILE) -r $(INSTALL_ROOT)/opt/LDJam46/bin/LDJam46.js
