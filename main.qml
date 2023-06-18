@@ -82,10 +82,6 @@ Window {
             height: parent.height*0.2
             fillMode: Image.PreserveAspectFit
             source: "qrc:///imagens/nuvem.png"
-            NumberAnimation on x{
-                to: parent.width
-                duration: 9999999
-            }
         }
         Dragao{
             id:dragao
